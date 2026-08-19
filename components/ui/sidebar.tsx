@@ -163,7 +163,7 @@ function Sidebar({
   variant?: 'sidebar' | 'floating' | 'inset'
   collapsible?: 'offcanvas' | 'icon' | 'none'
 }) {
-  const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
+  const { state, openMobile, setOpenMobile } = useSidebar()
 
   if (collapsible === 'none') {
     return (
@@ -180,14 +180,14 @@ function Sidebar({
     )
   }
 
-  if (isMobile) {
-    return (
-      <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
+  return (
+    <>
+      <Sheet open={openMobile} onOpenChange={setOpenMobile}>
         <SheetContent
           data-sidebar="sidebar"
           data-slot="sidebar"
           data-mobile="true"
-          className="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden"
+          className="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden md:hidden"
           style={
             {
               '--sidebar-width': SIDEBAR_WIDTH_MOBILE,
@@ -202,18 +202,14 @@ function Sidebar({
           <div className="flex h-full w-full flex-col">{children}</div>
         </SheetContent>
       </Sheet>
-    )
-  }
-
-  return (
-    <div
-      className="group peer text-sidebar-foreground hidden md:block"
-      data-state={state}
-      data-collapsible={state === 'collapsed' ? collapsible : ''}
-      data-variant={variant}
-      data-side={side}
-      data-slot="sidebar"
-    >
+      <div
+        className="group peer text-sidebar-foreground hidden md:block"
+        data-state={state}
+        data-collapsible={state === 'collapsed' ? collapsible : ''}
+        data-variant={variant}
+        data-side={side}
+        data-slot="sidebar"
+      >
       {/* This is what handles the sidebar gap on desktop */}
       <div
         data-slot="sidebar-gap"
@@ -250,6 +246,7 @@ function Sidebar({
         </div>
       </div>
     </div>
+    </>
   )
 }
 
@@ -266,7 +263,7 @@ function SidebarTrigger({
       data-slot="sidebar-trigger"
       variant="ghost"
       size="icon"
-      className={cn('size-7', className)}
+      className={cn('size-9 md:size-7', className)}
       onClick={(event) => {
         onClick?.(event)
         toggleSidebar()
@@ -309,7 +306,7 @@ function SidebarInset({ className, ...props }: React.ComponentProps<'main'>) {
     <main
       data-slot="sidebar-inset"
       className={cn(
-        'bg-background relative flex w-full flex-1 flex-col',
+        'bg-background relative flex min-w-0 w-full flex-1 flex-col overflow-x-hidden',
         'md:peer-data-[variant=inset]:m-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow-sm md:peer-data-[variant=inset]:peer-data-[state=collapsed]:ml-2',
         className,
       )}

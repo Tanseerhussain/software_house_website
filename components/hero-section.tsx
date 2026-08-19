@@ -19,7 +19,7 @@ export function HeroSection() {
           opacity: [0.3, 0.5, 0.3],
         }}
         transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY }}
-        className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full blur-3xl"
+        className="absolute top-1/4 left-1/4 h-56 w-56 rounded-full bg-blue-500 blur-3xl sm:h-96 sm:w-96"
       />
       <motion.div
         animate={{
@@ -27,7 +27,7 @@ export function HeroSection() {
           opacity: [0.3, 0.5, 0.3],
         }}
         transition={{ duration: 10, repeat: Number.POSITIVE_INFINITY, delay: 1 }}
-        className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500 rounded-full blur-3xl"
+        className="absolute bottom-1/4 right-1/4 h-56 w-56 rounded-full bg-cyan-500 blur-3xl sm:h-96 sm:w-96"
       />
 
       <div className="relative z-10 container mx-auto px-4 text-center">
@@ -45,7 +45,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-5xl md:text-7xl font-bold mb-6 text-balance"
+          className="text-3xl font-bold mb-6 text-balance sm:text-5xl md:text-7xl"
         >
           <span className="text-white">Building the Future with</span>
           <br />
@@ -58,7 +58,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed text-balance"
+          className="mb-10 max-w-2xl mx-auto text-base leading-relaxed text-balance text-gray-300 sm:text-xl"
         >
           We deliver modern, secure, and scalable digital solutions. From web development to AI integration, we
           transform your vision into reality.
@@ -72,14 +72,14 @@ export function HeroSection() {
         >
           <Link
             href="/contact"
-            className="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition-all"
+            className="group inline-flex w-full items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition-all sm:w-auto"
           >
             Get Started
             <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
           </Link>
           <Link
             href="/portfolio"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-lg font-semibold border border-white/20 hover:bg-white/20 transition-all"
+            className="inline-flex w-full items-center justify-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-lg font-semibold border border-white/20 hover:bg-white/20 transition-all sm:w-auto"
           >
             View Our Work
           </Link>

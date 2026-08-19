@@ -96,13 +96,13 @@ export default function PortfolioPage() {
               transition={{ duration: 0.6 }}
               className="text-center max-w-3xl mx-auto"
             >
-              <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 text-balance">
+              <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-white mb-6 text-balance">
                 Our{" "}
                 <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
                   Portfolio
                 </span>
               </h1>
-              <p className="text-xl text-gray-300 leading-relaxed text-balance">
+              <p className="text-base sm:text-xl text-gray-300 leading-relaxed text-balance">
                 Explore our latest projects and see how we've helped businesses transform their digital presence.
               </p>
             </motion.div>
@@ -112,14 +112,14 @@ export default function PortfolioPage() {
         {/* Filter Section */}
         <section className="py-12 sticky top-20 z-40 bg-black/80 backdrop-blur-xl border-b border-white/10">
           <div className="container mx-auto px-4">
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
               {categories.map((category) => (
                 <motion.button
                   key={category}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-6 py-2 rounded-lg font-medium transition-all ${
+                  className={`px-3 py-2 text-sm sm:px-6 rounded-lg font-medium transition-all ${
                     selectedCategory === category
                       ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-lg shadow-cyan-500/50"
                       : "bg-white/5 text-gray-300 hover:bg-white/10"

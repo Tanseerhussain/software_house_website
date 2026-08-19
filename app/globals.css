@@ -119,7 +119,10 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    overflow-x: clip;
+  }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground min-w-0;
   }
 }

@@ -29,7 +29,8 @@ It combines smooth animations, responsive layouts, and a clean architecture read
 ✔ Blog with search & filtering  
 ✔ Portfolio & project showcase  
 ✔ Services pages  
-✔ About page with team section
+✔ About page with team section  
+✔ Staff & student attendance portal (Sign In / Sign Out, work logs, reports)
 
 ---
 
@@ -67,3 +68,54 @@ It combines smooth animations, responsive layouts, and a clean architecture read
 ```bash
 git clone https://github.com/Tanseerhussain/software_house_website.git
 ```
+
+2️⃣ Install and run:
+
+```bash
+cd software_house
+cp .env.example .env
+npm install
+npm run dev
+```
+
+---
+
+## Attendance portal
+
+Open **Portal** on the website, or go to `/auth/login`.
+
+| Role | What they can do |
+| --- | --- |
+| Admin / HR | Approve students, live board, designation board, staff salaries, all reports, CSV export |
+| Manager | Live board, designation board, team reports |
+| Employee / Student | Sign In / Sign Out, daily work log, own history, own reports, short leave |
+
+Timezone is **Asia/Karachi** everywhere.
+
+### First admin
+
+Set these in `.env` (copied from `.env.example`):
+
+```
+AUTH_SECRET=a-long-random-string
+ADMIN_EMAIL=admin@appric.com
+ADMIN_PASSWORD=ChangeMe123!
+```
+
+The admin user is created automatically on first login if that email does not exist.
+
+### Student flow
+
+1. Student registers at `/auth/register`
+2. Account stays **pending** until Admin/HR approves it
+3. After approval, the student uses the same Sign In / Sign Out and work-log flow as staff
+
+### MongoDB collections
+
+- `portal_users`
+- `portal_attendance`
+- `portal_work_logs`
+- `portal_leave_requests`
+
+ 
+ 

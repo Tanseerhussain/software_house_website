@@ -84,11 +84,11 @@ export default function ContactPage() {
               transition={{ duration: 0.6 }}
               className="text-center max-w-3xl mx-auto"
             >
-              <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 text-balance">
+              <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-white mb-6 text-balance">
                 Get in{" "}
                 <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Touch</span>
               </h1>
-              <p className="text-xl text-gray-300 leading-relaxed text-balance">
+              <p className="text-base sm:text-xl text-gray-300 leading-relaxed text-balance">
                 Have a project in mind? Let's discuss how we can help bring your vision to life.
               </p>
             </motion.div>
@@ -105,8 +105,8 @@ export default function ContactPage() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <div className="bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
-                  <h2 className="text-3xl font-bold text-white mb-6">Send us a Message</h2>
+                <div className="bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-sm border border-white/10 rounded-2xl p-5 sm:p-8">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6">Send us a Message</h2>
 
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
@@ -247,7 +247,7 @@ export default function ContactPage() {
                       </div>
                       <div>
                         <h3 className="text-lg font-semibold text-white mb-1">{info.title}</h3>
-                        <p className="text-gray-300 group-hover:text-cyan-400 transition-colors">{info.value}</p>
+                        <p className="text-gray-300 break-words group-hover:text-cyan-400 transition-colors">{info.value}</p>
                       </div>
                     </motion.a>
                   ))}
@@ -257,15 +257,15 @@ export default function ContactPage() {
                 <div className="p-6 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 backdrop-blur-sm border border-white/10 rounded-xl">
                   <h3 className="text-xl font-semibold text-white mb-4">Business Hours</h3>
                   <div className="space-y-2 text-gray-300">
-                    <div className="flex justify-between">
+                    <div className="flex flex-col gap-1 sm:flex-row sm:justify-between">
                       <span>Monday - Friday</span>
                       <span className="text-cyan-400">9:00 AM - 6:00 PM</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex flex-col gap-1 sm:flex-row sm:justify-between">
                       <span>Saturday</span>
                       <span className="text-cyan-400">10:00 AM - 4:00 PM</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex flex-col gap-1 sm:flex-row sm:justify-between">
                       <span>Sunday</span>
                       <span className="text-gray-500">Closed</span>
                     </div>
@@ -306,7 +306,7 @@ export default function ContactPage() {
     >
       <h3 className="text-2xl font-bold text-white mb-4">Find Us</h3>
 
-      <div className="aspect-video rounded-xl overflow-hidden border border-white/10">
+      <div className="min-h-[220px] aspect-video rounded-xl overflow-hidden border border-white/10">
         <iframe
           src="https://www.google.com/maps?q=CMH+Gilgit+Main+Gate&output=embed"
           width="100%"
