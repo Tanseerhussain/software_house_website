@@ -110,7 +110,6 @@ The admin user is created automatically on first login if that email does not ex
 2. Account stays **pending** until Admin/HR approves it
 3. After approval, the student uses the same Sign In / Sign Out and work-log flow as staff
 
--
 ### MongoDB collections
 
 - `portal_users`
@@ -118,5 +117,4 @@ The admin user is created automatically on first login if that email does not ex
 - `portal_work_logs`
 - `portal_leave_requests`
 
--
  
