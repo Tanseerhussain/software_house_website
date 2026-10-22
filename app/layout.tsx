@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   title: "APPRIC - Innovative Software Solutions",
   description:
     "Modern software house delivering cutting-edge web development, mobile apps, UI/UX design, and AI solutions.",
+    other: {
+    "google-adsense-account": "ca-pub-9300067042826342",
+  },
   generator: "Roy.app",
   icons: {
     icon: [
@@ -44,15 +47,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-    <head>
-    <Script
-      id="google-adsense"
-      async
-      crossOrigin="anonymous"
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9300067042826342"
-    />
-  </head>
       <body className={`font-sans antialiased`}>
+        <Script
+          id="google-adsense"
+          async
+          crossOrigin="anonymous"
+          strategy="beforeInteractive"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9300067042826342"
+        />
         {children}
         <Analytics />
       </body>
