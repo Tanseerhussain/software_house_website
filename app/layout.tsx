@@ -4,7 +4,6 @@ import Script from "next/script"
 import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
-
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
@@ -45,14 +44,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+    <head>
+    <Script
+      id="google-adsense"
+      async
+      crossOrigin="anonymous"
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9300067042826342"
+    />
+  </head>
       <body className={`font-sans antialiased`}>
-         <Script
-          id="google-adsense"
-          async
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9300067042826342"
-        />
         {children}
         <Analytics />
       </body>
