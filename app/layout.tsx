@@ -1,17 +1,29 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
+import Script from "next/script"
 import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+const geistSans = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist-sans",
+})
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+})
+
+const ADSENSE_CLIENT = "ca-pub-9300067042826342"
 
 export const metadata: Metadata = {
   // APPRIC (SMC-Private) Limited
   title: "APPRIC - Innovative Software Solutions",
   description:
     "Modern software house delivering cutting-edge web development, mobile apps, UI/UX design, and AI solutions.",
+  other: {
+    "google-adsense-account": ADSENSE_CLIENT,
+  },
   generator: "Roy.app",
   icons: {
     icon: [
@@ -43,8 +55,15 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
       <body className="font-sans antialiased" suppressHydrationWarning>
+        <Script
+          id="google-adsense"
+          async
+          crossOrigin="anonymous"
+          strategy="beforeInteractive"
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
+        />
         {children}
         <Analytics />
       </body>
