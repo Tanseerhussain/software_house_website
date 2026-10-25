@@ -5,7 +5,7 @@ import Link from "next/link"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { Menu, X } from "lucide-react"
 
-export function Header() {
+export function Header({ companyName }: { companyName: string }) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const { scrollY } = useScroll()
@@ -50,7 +50,7 @@ export function Header() {
               animate={{ opacity: 1, x: 0 }}
               className="text-xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent sm:text-2xl"
             >
-              APPRIC
+              {companyName}
             </motion.div>
           </Link>
 

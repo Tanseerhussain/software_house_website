@@ -67,6 +67,18 @@ export function formatHours(hours: number | null | undefined): string {
   return `${hours.toFixed(1)}h`
 }
 
+/** Turns decimal hours into "2h 15m" so minutes are visible, not only hours. */
+export function formatHoursMinutes(hours: number | null | undefined): string {
+  if (hours == null) return "—"
+  const totalMinutes = Math.round(hours * 60)
+  const h = Math.floor(totalMinutes / 60)
+  const m = totalMinutes % 60
+  if (h > 0 && m > 0) return `${h}h ${m}m`
+  if (h > 0) return `${h}h`
+  if (m > 0) return `${m}m`
+  return "0m"
+}
+
 export function formatCurrencyPKR(amount: number | null | undefined): string {
   if (amount == null) return "—"
   return new Intl.NumberFormat("en-PK", {

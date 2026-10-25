@@ -11,6 +11,38 @@ import type { WorkLogStatus } from "@/lib/types"
 
 const STATUSES: WorkLogStatus[] = ["done", "in_progress", "not_done", "blocked"]
 
+function parseWholeNumber(raw: string | undefined, emptyValue: number): number | null {
+  const value = raw?.trim() ?? ""
+  if (!value) return emptyValue
+  if (!/^\d+$/.test(value)) return null
+  return Number(value)
+}
+
+function parseHoursAndMinutes(formData: FormData): { hoursSpent: number | null; error?: string } {
+  const hoursRaw = formData.get("hoursSpent")?.toString()
+  const minutesRaw = formData.get("minutesSpent")?.toString()
+  const hoursFilled = Boolean(hoursRaw?.trim())
+  const minutesFilled = Boolean(minutesRaw?.trim())
+
+  if (!hoursFilled && !minutesFilled) return { hoursSpent: null }
+
+  const hours = parseWholeNumber(hoursRaw, 0)
+  const minutes = parseWholeNumber(minutesRaw, 0)
+  if (hours == null || hours < 0 || hours > 24) {
+    return { hoursSpent: null, error: "Hours must be a whole number from 0 to 24" }
+  }
+  if (minutes == null || minutes < 0 || minutes > 59) {
+    return { hoursSpent: null, error: "Minutes must be a whole number from 0 to 59" }
+  }
+
+  const totalMinutes = hours * 60 + minutes
+  if (totalMinutes > 24 * 60) {
+    return { hoursSpent: null, error: "Time spent cannot exceed 24 hours" }
+  }
+
+  return { hoursSpent: Math.round((totalMinutes / 60) * 10000) / 10000 }
+}
+
 function revalidateWork() {
   revalidatePath("/dashboard")
   revalidatePath("/dashboard/work-log")
@@ -41,8 +73,8 @@ export async function createWorkLog(formData: FormData) {
   const title = formData.get("title")?.toString().trim() ?? ""
   const description = formData.get("description")?.toString().trim() || null
   const status = (formData.get("status")?.toString() as WorkLogStatus) || "in_progress"
-  const hoursRaw = formData.get("hoursSpent")?.toString()
-  const hoursSpent = hoursRaw ? Number(hoursRaw) : null
+  const time = parseHoursAndMinutes(formData)
+  if (time.error) return { error: time.error }
 
   if (!title) return { error: "Task title is required" }
   if (!STATUSES.includes(status)) return { error: "Invalid status" }
@@ -56,7 +88,7 @@ export async function createWorkLog(formData: FormData) {
     description,
     status,
     planned: true,
-    hoursSpent: hoursSpent != null && Number.isFinite(hoursSpent) ? hoursSpent : null,
+    hoursSpent: time.hoursSpent,
     createdAt: now,
     updatedAt: now,
   } as never)

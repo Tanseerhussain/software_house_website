@@ -1,9 +1,11 @@
 "use client"
 
 import { motion } from "framer-motion"
+import Image from "next/image"
+import type { CmsLogo } from "@/lib/cms/types"
 
-export function ClientLogos() {
-  const logos = ["Acme Corp", "TechStart", "InnovateLabs", "DataFlow", "CloudSync", "DevHub", "CodeCraft", "NextGen"]
+export function ClientLogos({ logos }: { logos: CmsLogo[] }) {
+  const loop = [...logos, ...logos, ...logos]
 
   return (
     <section className="py-16 bg-gradient-to-b from-black to-blue-950/20">
@@ -27,12 +29,16 @@ export function ClientLogos() {
             }}
             className="flex gap-16 items-center"
           >
-            {[...logos, ...logos, ...logos].map((logo, index) => (
+            {loop.map((logo, index) => (
               <div
-                key={index}
-                className="flex-shrink-0 text-2xl font-bold text-white/20 hover:text-white/40 transition-colors whitespace-nowrap"
+                key={`${logo.id}-${index}`}
+                className="flex h-12 flex-shrink-0 items-center text-2xl font-bold text-white/20 hover:text-white/40 transition-colors whitespace-nowrap"
               >
-                {logo}
+                {logo.logoUrl ? (
+                  <Image src={logo.logoUrl} alt={logo.name} width={140} height={48} className="h-10 w-auto object-contain opacity-50" />
+                ) : (
+                  logo.name
+                )}
               </div>
             ))}
           </motion.div>
