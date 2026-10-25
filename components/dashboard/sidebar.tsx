@@ -13,6 +13,7 @@ import {
   GraduationCap,
   Wallet,
   Radio,
+  Globe,
 } from "lucide-react"
 import {
   Sidebar,
@@ -41,6 +42,7 @@ const navItems = [
   { title: "Reports", href: "/dashboard/reports", icon: BarChart3 },
   { title: "Students", href: "/dashboard/students", icon: GraduationCap, minRole: "hr" as UserRole },
   { title: "Staff & salary", href: "/dashboard/staff", icon: Wallet, minRole: "hr" as UserRole },
+  { title: "Website CMS", href: "/dashboard/cms", icon: Globe, minRole: "admin" as UserRole },
   { title: "Profile", href: "/dashboard/profile", icon: UserCircle },
 ]
 

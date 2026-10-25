@@ -1,37 +1,18 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Code, Smartphone, Palette, Brain, ArrowRight } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import Link from "next/link"
+import { CmsIcon } from "@/lib/cms/icons"
+import type { CmsService, ServicesPageSetting } from "@/lib/cms/types"
 
-const services = [
-  {
-    icon: Code,
-    title: "Web Development",
-    description: "Modern, responsive websites built with Next.js, React, and cutting-edge technologies.",
-    color: "from-blue-500 to-cyan-500",
-  },
-  {
-    icon: Smartphone,
-    title: "Mobile Development",
-    description: "Native and cross-platform mobile applications that deliver seamless user experiences.",
-    color: "from-cyan-500 to-teal-500",
-  },
-  {
-    icon: Palette,
-    title: "UI/UX Design",
-    description: "Beautiful, intuitive designs that engage users and drive conversions.",
-    color: "from-teal-500 to-green-500",
-  },
-  {
-    icon: Brain,
-    title: "AI & Automation",
-    description: "Intelligent solutions powered by machine learning and artificial intelligence.",
-    color: "from-green-500 to-blue-500",
-  },
-]
-
-export function ServicesPreview() {
+export function ServicesPreview({
+  services,
+  page,
+}: {
+  services: CmsService[]
+  page: ServicesPageSetting
+}) {
   return (
     <section className="py-24 bg-black relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/20 to-transparent" />
@@ -46,17 +27,17 @@ export function ServicesPreview() {
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
             Our{" "}
-            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Services</span>
+            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              {page.heading}
+            </span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
-            Comprehensive solutions tailored to your business needs
-          </p>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">{page.subheading}</p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
             <motion.div
-              key={service.title}
+              key={service.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -65,8 +46,8 @@ export function ServicesPreview() {
               className="group relative"
             >
               <div className="h-full bg-gradient-to-b from-white/5 to-white/0 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-white/20 transition-all">
-                <div className={`inline-flex p-3 rounded-xl bg-gradient-to-r ${service.color} mb-4`}>
-                  <service.icon className="text-white" size={24} />
+                <div className={`inline-flex p-3 rounded-xl bg-gradient-to-r ${service.colorGradient} mb-4`}>
+                  <CmsIcon name={service.icon} className="text-white" size={24} />
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-3">{service.title}</h3>
                 <p className="text-gray-400 text-sm leading-relaxed mb-4">{service.description}</p>

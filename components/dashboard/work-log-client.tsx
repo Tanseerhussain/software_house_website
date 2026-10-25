@@ -17,7 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { createWorkLog, deleteWorkLog, updateWorkLogStatus } from "@/actions/work-logs"
-import { WORK_LOG_COLORS } from "@/lib/dashboard/utils"
+import { formatHoursMinutes, WORK_LOG_COLORS } from "@/lib/dashboard/utils"
 import type { WorkLog, WorkLogStatus } from "@/lib/types"
 
 const STATUSES: WorkLogStatus[] = ["done", "in_progress", "not_done", "blocked"]
@@ -108,9 +108,15 @@ export function WorkLogClient({ logs, signedIn, date }: { logs: WorkLog[]; signe
                 </SelectContent>
               </Select>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="hoursSpent">Hours spent</Label>
-              <Input id="hoursSpent" name="hoursSpent" type="number" min="0" max="24" step="0.5" />
+            <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-2">
+                <Label htmlFor="hoursSpent">Hours</Label>
+                <Input id="hoursSpent" name="hoursSpent" type="number" min="0" max="24" step="1" placeholder="0" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="minutesSpent">Minutes</Label>
+                <Input id="minutesSpent" name="minutesSpent" type="number" min="0" max="59" step="1" placeholder="0" />
+              </div>
             </div>
             <Button type="submit" disabled={isPending || !signedIn} className="w-full gap-2 sm:w-fit">
               {isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Plus className="h-4 w-4" />}
@@ -135,7 +141,7 @@ export function WorkLogClient({ logs, signedIn, date }: { logs: WorkLog[]; signe
                     {log.status.replace("_", " ")}
                   </Badge>
                   {log.hoursSpent != null && (
-                    <span className="text-xs text-muted-foreground">{log.hoursSpent}h</span>
+                    <span className="text-xs text-muted-foreground">{formatHoursMinutes(log.hoursSpent)}</span>
                   )}
                 </div>
               </div>

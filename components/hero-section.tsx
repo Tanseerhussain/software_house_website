@@ -3,16 +3,15 @@
 import { motion } from "framer-motion"
 import { ArrowRight, Sparkles } from "lucide-react"
 import Link from "next/link"
+import type { HeroSetting, StatItem } from "@/lib/cms/types"
 
-export function HeroSection() {
+export function HeroSection({ hero, stats }: { hero: HeroSetting; stats: StatItem[] }) {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-black to-cyan-950">
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20" />
       </div>
 
-      {/* Animated orbs */}
       <motion.div
         animate={{
           scale: [1, 1.2, 1],
@@ -38,7 +37,7 @@ export function HeroSection() {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8"
         >
           <Sparkles size={16} className="text-cyan-400" />
-          <span className="text-sm text-gray-300">Innovative Software Solutions</span>
+          <span className="text-sm text-gray-300">{hero.badge}</span>
         </motion.div>
 
         <motion.h1
@@ -47,10 +46,10 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-3xl font-bold mb-6 text-balance sm:text-5xl md:text-7xl"
         >
-          <span className="text-white">Building the Future with</span>
+          <span className="text-white">{hero.headline}</span>
           <br />
           <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
-            Cutting-Edge Technology
+            {hero.headlineHighlight}
           </span>
         </motion.h1>
 
@@ -60,8 +59,7 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="mb-10 max-w-2xl mx-auto text-base leading-relaxed text-balance text-gray-300 sm:text-xl"
         >
-          We deliver modern, secure, and scalable digital solutions. From web development to AI integration, we
-          transform your vision into reality.
+          {hero.subheadline}
         </motion.p>
 
         <motion.div
@@ -71,17 +69,17 @@ export function HeroSection() {
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <Link
-            href="/contact"
+            href={hero.primaryCtaHref || "/contact"}
             className="group inline-flex w-full items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition-all sm:w-auto"
           >
-            Get Started
+            {hero.primaryCtaLabel}
             <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
           </Link>
           <Link
-            href="/portfolio"
+            href={hero.secondaryCtaHref || "/portfolio"}
             className="inline-flex w-full items-center justify-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-lg font-semibold border border-white/20 hover:bg-white/20 transition-all sm:w-auto"
           >
-            View Our Work
+            {hero.secondaryCtaLabel}
           </Link>
         </motion.div>
 
@@ -91,14 +89,9 @@ export function HeroSection() {
           transition={{ duration: 1, delay: 1 }}
           className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
         >
-          {[
-            { number: "100+", label: "Projects Delivered" },
-            { number: "50+", label: "Happy Clients" },
-            { number: "15+", label: "Team Members" },
-            { number: "5+", label: "Years Experience" },
-          ].map((stat, index) => (
+          {stats.map((stat, index) => (
             <motion.div
-              key={stat.label}
+              key={`${stat.label}-${index}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.2 + index * 0.1 }}
@@ -113,7 +106,6 @@ export function HeroSection() {
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
       <motion.div
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
