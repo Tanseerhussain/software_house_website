@@ -118,4 +118,3 @@ The admin user is created automatically on first login if that email does not ex
 - `portal_leave_requests`
 
  
- 
