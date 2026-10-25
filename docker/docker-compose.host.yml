@@ -1,0 +1,46 @@
+name: appric-host
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: appric-web-host
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.host
+    depends_on:
+      mongodb:
+        condition: service_healthy
+        required: false
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # Optional on-host MongoDB. Skip this if MONGODB_URI points at Atlas.
+  # Start with: docker compose -f docker-compose.host.yml --profile mongo up -d --build
+  mongodb:
+    profiles: ["mongo"]
+    image: mongo:7
+    container_name: appric-mongodb-host
+    restart: unless-stopped
+    volumes:
+      - mongodb_host_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  mongodb_host_data:

@@ -45,6 +45,9 @@ export function canAccessRoute(
     )
   }
 
+  if (routePrefix.startsWith("/dashboard/cms")) {
+    return userRole === "admin"
+  }
   if (routePrefix.startsWith("/dashboard/staff")) {
     return hasMinimumRole(userRole, "hr")
   }
